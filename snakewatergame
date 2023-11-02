@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define SNAKE 1
+#define WATER 2
+#define GUN 3
+
+int main() {
+    int playerScore = 0;
+    int computerScore = 0;
+    int rounds = 0;
+
+    printf("Welcome to Snake-Water-Gun game!\n\n");
+
+    while(1) {
+        int playerMove;
+        printf("Enter your move: \n(1 = Snake\n 2 = Water\n 3 = Gun\n 0 = Quit): ");
+        scanf("%d", &playerMove);
+
+        if (playerMove == 0) {
+            break;
+        }
+
+        if (playerMove < 1 || playerMove > 3) {
+            printf("Invalid move! Please try again.\n");
+            continue;
+        }
+
+        int computerMove = rand() % 3 + 1;
+
+        printf("You played: ");
+        switch(playerMove) {
+            case SNAKE:
+                printf("Snake\n");
+                break;
+            case WATER:
+                printf("Water\n");
+                break;
+            case GUN:
+                printf("Gun\n");
+                break;
+        }
+
+        printf("Computer played: ");
+        switch(computerMove) {
+            case SNAKE:
+                printf("Snake\n");
+                break;
+            case WATER:
+                printf("Water\n");
+                break;
+            case GUN:
+                printf("Gun\n");
+                break;
+        }
+
+        if (playerMove == computerMove) {
+            printf("It's a tie!\n");
+        } else if (playerMove == SNAKE && computerMove == GUN ||
+                   playerMove == WATER && computerMove == SNAKE ||
+                   playerMove == GUN && computerMove == WATER) {
+            printf("You win this round!\n");
+            playerScore++;
+        } else {
+            printf("Computer wins this round!\n");
+            computerScore++;
+        }
+        
+        rounds++;
+        printf("Current score: You %d - %d Computer\n\n", playerScore, computerScore);
+    }
+
+    printf("\nFinal score: You %d - %d Computer\n", playerScore, computerScore);
+    printf("Total rounds played: %d\n", rounds);
+    if(playerScore>computerScore){
+        printf("You Won!!\n");
+    }
+    else{
+        printf("Computer Won!!\n");
+    }
+return 0;
+}
